@@ -1,9 +1,11 @@
+import {GoalService} from '../goals/goal.service';
 import { Component, OnInit } from '@angular/core';
 import { Goal } from '../goal'
 
 @Component({
   selector: 'app-goal',
-  templateUrl: './goal.component.html',
+  templateUrl: './goal.component.html
+  providers:[GoalService], //add the providers to the component
   styleUrls: ['./goal.component.css']
 })
 
@@ -18,7 +20,7 @@ export class GoalComponent implements OnInit {
 
   ]
 
-  deleteGoal(isComplete, index) {
+  deleteGoal(isComplete, index) { 
     if (isComplete) {
       let toDelete = confirm(`Are you sure you want to delete ${this.goals[index].name}`)
 
@@ -39,8 +41,10 @@ export class GoalComponent implements OnInit {
   toogleDetails(index) {
     this.goals[index].showDescription = !this.goals[index].showDescription;
   }
-  
-  constructor() { }
+goals:Goal[];
+  constructor(goalService.GoalService) {
+    this.goals = goalService.getGoals()
+   }
   ngOnInit() {
   }
 }
